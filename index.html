@@ -1,330 +1,51 @@
 <!doctype html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0c0d10" />
-    <title>Frame — AI video player</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="app-shell">
-      <aside class="sidebar" id="sidebar">
-        <div class="brand-row">
-          <a href="#home" class="brand" aria-label="Frame главная">
-            <span class="brand-mark">▶</span>
-            <span>frame<span class="brand-dot">.</span></span>
-          </a>
-        </div>
-
-        <div class="workspace-label">Рабочее пространство</div>
-
-        <nav class="main-nav" aria-label="Основная навигация">
-          <a href="#home" class="nav-item active" data-nav="home">
-            <span class="nav-icon">⌂</span>
-            <span>Главная</span>
-          </a>
-          <a href="#library" class="nav-item" data-nav="library">
-            <span class="nav-icon">▤</span>
-            <span>Библиотека</span>
-            <span class="nav-count" id="library-count">0</span>
-          </a>
-          <a href="#pipeline" class="nav-item" data-nav="pipeline">
-            <span class="nav-icon">⚡</span>
-            <span>Улучшение</span>
-          </a>
-        </nav>
-
-        <div class="sidebar-bottom">
-          <div class="storage-card">
-            <div class="storage-head">
-              <span>Конфиденциальность</span>
-              <span class="storage-dot"></span>
-            </div>
-            <p>Файлы остаются локально на вашем устройстве.</p>
-            <div class="storage-bar"><i></i></div>
-            <small>Без отправки на сервер</small>
-          </div>
-
-          <div class="profile-strip">
-            <div class="avatar">Г</div>
-            <div>
-              <strong>Гость</strong>
-              <span>Локальный режим</span>
-            </div>
-            <button class="mini-button" aria-label="Настройки">⋯</button>
-          </div>
-        </div>
-      </aside>
-
-      <main class="main-content" id="home">
-        <header class="topbar">
-          <button class="mobile-menu icon-button" id="menu-button" aria-label="Открыть меню">☰</button>
-          <div class="breadcrumbs">
-            <span>Рабочее пространство</span>
-            <span class="slash">/</span>
-            <strong id="crumb-current">Главная</strong>
-          </div>
-          <div class="top-actions">
-            <span class="local-tag"><i></i>Локальный режим</span>
-            <button class="help-button" id="about-button" aria-label="О проекте">?</button>
-          </div>
-        </header>
-
-        <section class="hero-section">
-          <div class="hero-copy">
-            <div class="eyebrow"><span>✦</span> VIDEO EXPERIENCE</div>
-            <h1>Просмотр и улучшение видео в одном окне.</h1>
-            <p>
-              Загружайте ролики, настраивайте картинку по вкусу и смотрите в приятном браузерном плеере без скачивания.
-            </p>
-
-            <div class="hero-actions">
-              <button class="primary-button" id="upload-button"><span class="plus">＋</span> Добавить видео</button>
-              <button class="ghost-button" id="library-cta">Моя библиотека</button>
-            </div>
-          </div>
-
-          <div class="hero-panel">
-            <div class="mini-player">
-              <div class="mini-screen">
-                <div class="mini-overlay">
-                  <span class="mini-tag">4K READY</span>
-                  <div class="mini-wave"></div>
-                </div>
-              </div>
-              <div class="mini-footer">
-                <div>
-                  <strong>Frame</strong>
-                  <span>AI preview</span>
-                </div>
-                <button class="mini-pill">enhance</button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="upload-panel" id="drop-zone" aria-label="Загрузка видео">
-          <div class="upload-art">
-            <div class="upload-glow"></div>
-            <div class="upload-icon">📁</div>
-          </div>
-
-          <div class="upload-copy">
-            <h2>Начните с вашего видео</h2>
-            <p>Нажмите, чтобы выбрать файл, или просто перетащите его в эту область.</p>
-            <div class="upload-meta">
-              <span>MP4</span>
-              <span>WebM</span>
-              <span>MOV</span>
-            </div>
-          </div>
-
-          <button class="secondary-button" id="choose-button">Выбрать файл</button>
-          <input type="file" id="file-input" accept="video/*" hidden />
-        </section>
-
-        <section class="feature-strip" id="pipeline">
-          <article class="feature-card">
-            <div class="feature-icon">✦</div>
-            <div>
-              <strong>Улучшение качества</strong>
-              <p>Подстройка яркости, контраста и насыщенности в реальном времени.</p>
-            </div>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon">▣</div>
-            <div>
-              <strong>Комфортный просмотр</strong>
-              <p>Плеер с понятными кнопками, режимом кинотеатра и полной быстрой навигацией.</p>
-            </div>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon">◎</div>
-            <div>
-              <strong>Без скачивания</strong>
-              <p>Смотреть прямо в браузере, не загружая ролик на устройство.</p>
-            </div>
-          </article>
-        </section>
-
-        <section class="library-section" id="library">
-          <div class="section-heading">
-            <div>
-              <div class="eyebrow"><span>✦</span> LIBRARY</div>
-              <h2>Недавно добавленные</h2>
-            </div>
-            <div class="library-tools">
-              <label class="search-box">
-                <span>⌕</span>
-                <input id="search-input" type="search" placeholder="Поиск видео" aria-label="Поиск видео" />
-              </label>
-              <button class="sort-button" id="sort-button" type="button">Недавно добавленные <span>⌄</span></button>
-            </div>
-          </div>
-
-          <div class="video-grid" id="video-grid"></div>
-
-          <div class="empty-state" id="empty-state">
-            <div class="empty-icon">▧</div>
-            <strong>Здесь пока пусто</strong>
-            <span>Добавьте первое видео, чтобы начать просмотр.</span>
-            <button class="text-button" id="empty-upload" type="button">＋ Добавить видео</button>
-          </div>
-        </section>
-
-        <footer class="page-footer">
-          <span>Frame <span class="footer-dot">●</span> локальный просмотр</span>
-          <button id="privacy-button" type="button">Конфиденциальность</button>
-        </footer>
-      </main>
-    </div>
-
-    <div class="player-overlay" id="player-overlay" aria-hidden="true">
-      <div class="player-dialog">
-        <header class="player-header">
-          <button class="back-button" id="close-player" type="button"><span>←</span> Библиотека</button>
-
-          <div class="playing-title">
-            <span class="playing-indicator"></span>
-            <span id="player-title">Просмотр</span>
-          </div>
-
-          <div class="player-header-actions">
-            <button class="icon-button" id="theater-button" type="button" title="Режим кинотеатра" aria-label="Кинотеатр">▣</button>
-            <button class="icon-button" id="close-player-x" type="button" aria-label="Закрыть плеер">✕</button>
-          </div>
-        </header>
-
-        <div class="player-layout">
-          <div class="video-column">
-            <div class="video-stage" id="video-stage">
-              <video id="video" playsinline preload="metadata"></video>
-
-              <div class="video-empty" id="video-empty">
-                <div class="empty-play">▶</div>
-                <span>Выберите видео, чтобы начать просмотр</span>
-              </div>
-
-              <div class="center-play" id="center-play">▶</div>
-
-              <div class="video-controls">
-                <div class="timeline-wrap">
-                  <span id="current-time">0:00</span>
-                  <input type="range" id="seek" min="0" max="1000" value="0" aria-label="Перемотка" />
-                  <span id="duration">0:00</span>
-                </div>
-
-                <div class="controls-row">
-                  <div class="controls-left">
-                    <button class="control-button" id="play-button" type="button" aria-label="Воспроизвести">▶</button>
-                    <button class="control-button" id="skip-back" type="button" title="Назад на 10 секунд">↶<small>10</small></button>
-                    <button class="control-button" id="skip-forward" type="button" title="Вперёд на 10 секунд">↷<small>10</small></button>
-
-                    <div class="volume-control">
-                      <button class="control-button" id="mute-button" type="button" aria-label="Отключить звук">◖</button>
-                      <input type="range" id="volume" min="0" max="1" step="0.01" value="1" aria-label="Громкость" />
-                    </div>
-                  </div>
-
-                  <div class="controls-right">
-                    <button class="control-button quality-toggle" id="enhance-toggle" type="button" aria-pressed="false">
-                      <span>✦</span>
-                      Улучшение
-                    </button>
-                    <button class="control-button speed-button" id="speed-button" type="button">1×</button>
-                    <button class="control-button" id="fullscreen-button" type="button" aria-label="Полный экран">⛶</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <aside class="player-info">
-            <div class="player-info-top">
-              <div>
-                <span class="eyebrow">VIDEO</span>
-                <h2 id="info-title">Загрузите видео</h2>
-              </div>
-              <button class="icon-button subtle" id="player-more" type="button" aria-label="Дополнительно">⋯</button>
-            </div>
-
-            <div class="info-divider"></div>
-
-            <div class="info-stats">
-              <div>
-                <span>Формат</span>
-                <strong id="info-format">—</strong>
-              </div>
-              <div>
-                <span>Длительность</span>
-                <strong id="info-duration">—</strong>
-              </div>
-              <div>
-                <span>Размер</span>
-                <strong id="info-size">—</strong>
-              </div>
-            </div>
-
-            <div class="enhance-card">
-              <div class="enhance-head">
-                <div class="enhance-icon">✦</div>
-                <div>
-                  <strong>AI Visual</strong>
-                  <span>Подстройка изображения</span>
-                </div>
-              </div>
-
-              <div class="preset-row">
-                <button class="preset active" data-preset="soft" type="button">Мягко</button>
-                <button class="preset" data-preset="cinematic" type="button">Кинематограф</button>
-                <button class="preset" data-preset="vivid" type="button">Ярко</button>
-              </div>
-
-              <div class="switch-row">
-                <span>Визуальное улучшение</span>
-                <button class="switch" id="enhance-switch" role="switch" aria-checked="false" aria-label="Включить улучшение">
-                  <i></i>
-                </button>
-              </div>
-
-              <label class="slider-label"><span>Яркость</span><span id="brightness-value">100%</span></label>
-              <input class="setting-slider" id="brightness" type="range" min="70" max="140" value="100" />
-
-              <label class="slider-label"><span>Контраст</span><span id="contrast-value">100%</span></label>
-              <input class="setting-slider" id="contrast" type="range" min="70" max="140" value="100" />
-
-              <label class="slider-label"><span>Насыщенность</span><span id="saturation-value">100%</span></label>
-              <input class="setting-slider" id="saturation" type="range" min="0" max="150" value="100" />
-
-              <button class="reset-button" id="reset-settings" type="button">Сбросить</button>
-            </div>
-          </aside>
-        </div>
-
-        <div class="player-bottom">
-          <span><i class="secure-dot"></i> Видеоплеер в браузере · без загрузки на сервер</span>
-          <button id="keyboard-help" type="button">Горячие клавиши <kbd>?</kbd></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-    <div class="modal-backdrop" id="info-modal" aria-hidden="true">
-      <div class="info-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <button class="modal-close" id="modal-close" aria-label="Закрыть">✕</button>
-        <div class="modal-icon">✦</div>
-        <h2 id="modal-title">Frame</h2>
-        <p>Это приватный видеоплеер для локального просмотра. Файлы не отправляются на сервер и воспроизводятся прямо в браузере.</p>
-        <p class="modal-note">Визуальные настройки меняют только отображение в плеере, не исходный файл.</p>
-        <button class="primary-button modal-ok" id="modal-ok" type="button">Понятно</button>
-      </div>
-    </div>
-
-    <script src="app.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0c0d10" />
+  <title>Frame — AI video player</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .ai-enhance-box{margin-top:16px;padding:13px;border:1px solid rgba(185,242,109,.2);border-radius:12px;background:rgba(185,242,109,.045)}
+    .ai-enhance-box p{font-size:10px;line-height:1.55;color:#a7aeb8;margin:8px 0}
+    .ai-run-button,.ai-result-button{width:100%;min-height:36px;border:0;border-radius:9px;background:#b9f26d;color:#10170d;font-weight:700;font-size:11px}
+    .ai-run-button:disabled{opacity:.55;cursor:wait}.ai-progress{width:100%;height:4px;background:#ffffff18;border-radius:5px;overflow:hidden;margin:10px 0 6px}
+    .ai-progress i{display:block;width:0;height:100%;background:#b9f26d;transition:width .3s}.ai-status{min-height:15px}.ai-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.ai-result-button{display:grid;place-items:center;text-decoration:none;background:#242a20;color:#d4f7a4;border:1px solid #536a35}
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-row"><a href="#home" class="brand"><span class="brand-mark">▶</span><span>frame<span class="brand-dot">.</span></span></a></div>
+      <div class="workspace-label">Рабочее пространство</div>
+      <nav class="main-nav" aria-label="Основная навигация">
+        <a href="#home" class="nav-item active" data-nav="home"><span class="nav-icon">⌂</span><span>Главная</span></a>
+        <a href="#library" class="nav-item" data-nav="library"><span class="nav-icon">▤</span><span>Библиотека</span><span class="nav-count" id="library-count">0</span></a>
+        <a href="#pipeline" class="nav-item" data-nav="pipeline"><span class="nav-icon">⚡</span><span>AI-улучшение</span></a>
+      </nav>
+      <div class="sidebar-bottom"><div class="storage-card"><div class="storage-head"><span>Конфиденциальность</span><span class="storage-dot"></span></div><p>Для AI-обработки выбранный файл отправляется на ваш сервер.</p><div class="storage-bar"><i></i></div><small>Серверная обработка Real-ESRGAN</small></div><div class="profile-strip"><div class="avatar">Г</div><div><strong>Гость</strong><span>Локальный режим</span></div></div></div>
+    </aside>
+    <main class="main-content" id="home">
+      <header class="topbar"><button class="mobile-menu icon-button" id="menu-button" aria-label="Меню">☰</button><div class="breadcrumbs"><span>Рабочее пространство</span><span class="slash">/</span><strong id="crumb-current">Главная</strong></div><div class="top-actions"><span class="local-tag"><i></i>Приватное видео</span><button class="help-button" id="about-button" aria-label="О проекте">?</button></div></header>
+      <section class="hero-section"><div class="hero-copy"><div class="eyebrow"><span>✦</span> REAL-ESRGAN VIDEO ENHANCER</div><h1>Улучшайте видео с помощью AI.</h1><p>Загрузите свой ролик, запустите нейросетевое увеличение детализации и смотрите результат в браузере.</p><div class="hero-actions"><button class="primary-button" id="upload-button"><span class="plus">＋</span>Добавить видео</button><button class="ghost-button" id="library-cta">Моя библиотека</button></div></div><div class="hero-panel"><div class="mini-player"><div class="mini-screen"><div class="mini-overlay"><span class="mini-tag">REAL-ESRGAN</span><div class="mini-wave"></div></div></div><div class="mini-footer"><div><strong>Frame AI</strong><span>Улучшение видео</span></div><span class="mini-pill">x2 upscale</span></div></div></div></section>
+      <section class="upload-panel" id="drop-zone" aria-label="Загрузка видео"><div class="upload-art"><div class="upload-glow"></div><div class="upload-icon">📁</div></div><div class="upload-copy"><h2>Выберите видео для обработки</h2><p>Перетащите файл сюда или выберите его на устройстве. AI-обработка использует сервер.</p><div class="upload-meta"><span>MP4</span><span>WebM</span><span>MOV</span><span>до 500 МБ</span></div></div><button class="secondary-button" id="choose-button">Выбрать видео</button><input type="file" id="file-input" accept="video/mp4,video/webm,video/quicktime,video/x-matroska" hidden /></section>
+      <section class="feature-strip" id="pipeline"><article class="feature-card"><div class="feature-icon">✦</div><div><strong>Real-ESRGAN</strong><p>Нейросетевое восстановление деталей и увеличение разрешения кадров.</p></div></article><article class="feature-card"><div class="feature-icon">▣</div><div><strong>Сохранение аудио</strong><p>Видео и звук собираются обратно в MP4 после обработки кадров.</p></div></article><article class="feature-card"><div class="feature-icon">◎</div><div><strong>Просмотр результата</strong><p>Готовое улучшенное видео можно сразу посмотреть в плеере или скачать.</p></div></article></section>
+      <section class="library-section" id="library"><div class="section-heading"><div><div class="eyebrow"><span>✦</span> LIBRARY</div><h2>Моя библиотека</h2></div><div class="library-tools"><label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Поиск видео" aria-label="Поиск видео" /></label><button class="sort-button" id="sort-button">Недавно добавленные <span>⌄</span></button></div></div><div class="video-grid" id="video-grid"></div><div class="empty-state" id="empty-state"><div class="empty-icon">▧</div><strong>Здесь пока пусто</strong><span>Добавьте первое видео, чтобы начать.</span><button class="text-button" id="empty-upload">＋ Добавить видео</button></div></section>
+      <footer class="page-footer"><span>Frame <span class="footer-dot">●</span> Real-ESRGAN AI processing</span><button id="privacy-button">Конфиденциальность</button></footer>
+    </main>
+  </div>
+  <div class="player-overlay" id="player-overlay" aria-hidden="true"><div class="player-dialog"><header class="player-header"><button class="back-button" id="close-player"><span>←</span> Библиотека</button><div class="playing-title"><span class="playing-indicator"></span><span id="player-title">Просмотр</span></div><div class="player-header-actions"><button class="icon-button" id="theater-button" title="Режим кинотеатра">▣</button><button class="icon-button" id="close-player-x" aria-label="Закрыть">✕</button></div></header>
+    <div class="player-layout"><div class="video-column"><div class="video-stage" id="video-stage"><video id="video" playsinline preload="metadata"></video><div class="video-empty" id="video-empty"><div class="empty-play">▶</div><span>Выберите видео для просмотра</span></div><div class="center-play" id="center-play">▶</div><div class="video-controls"><div class="timeline-wrap"><span id="current-time">0:00</span><input type="range" id="seek" min="0" max="1000" value="0" aria-label="Перемотка" /><span id="duration">0:00</span></div><div class="controls-row"><div class="controls-left"><button class="control-button" id="play-button" aria-label="Воспроизвести">▶</button><button class="control-button" id="skip-back" title="Назад на 10 секунд">↶<small>10</small></button><button class="control-button" id="skip-forward" title="Вперёд на 10 секунд">↷<small>10</small></button><div class="volume-control"><button class="control-button" id="mute-button" aria-label="Звук">◖</button><input type="range" id="volume" min="0" max="1" step="0.01" value="1" aria-label="Громкость" /></div></div><div class="controls-right"><button class="control-button quality-toggle" id="enhance-toggle" aria-pressed="false"><span>✦</span> Улучшение</button><button class="control-button speed-button" id="speed-button">1×</button><button class="control-button" id="fullscreen-button" aria-label="Полный экран">⛶</button></div></div></div></div></div>
+    <aside class="player-info"><div class="player-info-top"><div><span class="eyebrow">VIDEO</span><h2 id="info-title">Загрузите видео</h2></div><button class="icon-button subtle" id="player-more" aria-label="Дополнительно">⋯</button></div><div class="info-divider"></div><div class="info-stats"><div><span>Формат</span><strong id="info-format">—</strong></div><div><span>Длительность</span><strong id="info-duration">—</strong></div><div><span>Размер</span><strong id="info-size">—</strong></div></div><div class="enhance-card"><div class="enhance-head"><div class="enhance-icon">✦</div><div><strong>Real-ESRGAN</strong><span>Нейросетевое улучшение видео</span></div></div><div class="switch-row"><span>Визуальные фильтры</span><button class="switch" id="enhance-switch" role="switch" aria-checked="false" aria-label="Включить фильтры"><i></i></button></div><label class="slider-label"><span>Яркость</span><span id="brightness-value">100%</span></label><input class="setting-slider" id="brightness" type="range" min="70" max="140" value="100" /><label class="slider-label"><span>Контраст</span><span id="contrast-value">100%</span></label><input class="setting-slider" id="contrast" type="range" min="70" max="140" value="100" /><label class="slider-label"><span>Насыщенность</span><span id="saturation-value">100%</span></label><input class="setting-slider" id="saturation" type="range" min="0" max="150" value="100" /><button class="reset-button" id="reset-settings">Сбросить фильтры</button>
+      <div class="ai-enhance-box"><button class="ai-run-button" id="ai-run-button" type="button">✦ Обработать моделью AI</button><div class="ai-progress"><i id="ai-progress-bar"></i></div><p class="ai-status" id="ai-status">Real-ESRGAN x2 · обработка на сервере · максимум 2 минуты видео.</p><div class="ai-actions hidden" id="ai-actions"><button class="ai-result-button" id="ai-play-result" type="button">Смотреть результат</button><a class="ai-result-button" id="ai-download-result" download>Скачать MP4</a></div></div>
+    </div></aside></div><div class="player-bottom"><span><i class="secure-dot"></i> AI-обработка отправляет ролик на настроенный сервер</span><button id="keyboard-help">Горячие клавиши <kbd>?</kbd></button></div></div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal-backdrop" id="info-modal" aria-hidden="true"><div class="info-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" id="modal-close" aria-label="Закрыть">✕</button><div class="modal-icon">✦</div><h2 id="modal-title">Приватность и AI</h2><p>Обычный просмотр остаётся в браузере. Для реального AI-улучшения выбранный файл загружается на сервер приложения и обрабатывается Real-ESRGAN.</p><p class="modal-note">Используйте только видео, на обработку которых у вас есть права. Не загружайте защищённое DRM-видео.</p><button class="primary-button modal-ok" id="modal-ok">Понятно</button></div></div>
+  <script src="app.js"></script>
+  <script src="ai-enhance.js"></script>
+</body>
 </html>
